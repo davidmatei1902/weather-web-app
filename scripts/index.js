@@ -44,3 +44,27 @@ document.addEventListener("DOMContentLoaded", (_event) => {
         }
     });
 });
+
+
+/////////////////////////////////////////////////////
+/// USE OF https://home.openweathermap.org/ /////////
+/////////////////////////////////////////////////////
+
+const apiKey = "09871ea9073f00fec9801644374f12ac";
+const cityName = "Bucharest";
+const apiUrl = 'https://api.openweathermap.org/data/2.5/weather?units=metric'
+
+async function fetchWeather(){
+    const response = await fetch(apiUrl + `&q=${cityName}` +  `&APPID=${apiKey}`);
+    var data = await response.json();
+
+    document.querySelector('.city').innerHTML = data.name;
+    document.querySelector('.temp').innerHTML = Math.round(data.main.temp) + '°C';
+    document.querySelector('.min-temp').innerHTML = "Min: " + data.main.temp_min + '°C';
+    document.querySelector('.max-temp').innerHTML = "Max: " + data.main.temp_max + '°C';
+    document.querySelector('.humidity-val').innerHTML = data.main.humidity + '%';
+    document.querySelector('.wind-speed-val').innerHTML = data.main.humidity + ' km/h';
+    
+    console.log(data);
+}
+fetchWeather();

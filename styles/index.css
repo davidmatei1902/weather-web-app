@@ -4,6 +4,10 @@
     --input-text-color:red;
     --search-icon-color:grey;
     --input-hover-bgcolor:rgba(204,255,255,1);
+    --text-color:white;
+    --weather-container-shadow-color: rgba(148, 212, 181, 0.4);
+
+    --output-card-city-weather-bg:linear-gradient(100deg,#00feba,#5b548a);
 }
 
 body {
@@ -16,6 +20,101 @@ body {
     margin:200px auto 0;
     border-radius: 5px;
 }
+
+
+
+
+
+
+.weather-container {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-gap: 20px;
+    padding: 20px;
+    max-width: 500px; 
+    margin: 0 auto;
+    background: var(--output-card-city-weather-bg);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px 0 var(--weather-container-shadow-color);
+    color: var(--text-color);
+}
+
+.upper-part {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    align-items: center;
+    gap: 10px;
+}
+
+.weather-icon {
+    width: 80px;
+    height: 80px;
+    justify-self: center;
+}
+
+.city {
+    font-size: 2rem;
+    text-align: left;
+    margin: 0;
+}
+
+.temp-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.min-max {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+
+.temp {
+    font-size: 1.5rem;
+    margin: 0;
+    text-align: center;
+}
+
+.min-temp, .max-temp {
+    font-size: 0.8rem;
+    margin: 0;
+    text-align: center;
+}
+
+.lower-part {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.humidity-section, .wind-speed-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.humidity-icon, .wind-speed-icon {
+    width: 50px;
+    height: 50px;
+}
+
+.humidity-val, .wind-speed-val {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.humidity-text, .wind-speed-text {
+    font-size: 1rem;
+    margin: 0;
+}
+
+
+
+
+
+
 
 .row 
 {
