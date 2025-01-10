@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", (_event) => {
     console.log(lon);
     console.log(lat);
 
-    findFiveDayWeather(lon, lat);
+    findFiveDayWeather(lat, lon);
   }
   /////////////////////////////////////////////////////
 
