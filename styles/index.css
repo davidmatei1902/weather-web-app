@@ -1,7 +1,7 @@
 :root {
     --background-color:#262a2f;
     --search-box-bgcolor:#fff;
-    --input-text-color:red;
+    --input-text-color:black;
     --search-icon-color:grey;
     --input-hover-bgcolor:rgba(204,255,255,1);
     --text-color:white;
@@ -30,13 +30,15 @@ body {
     display: grid;
     grid-template-rows: auto auto;
     grid-gap: 20px;
-    padding: 20px;
+    padding: 0 20px 20px 0;
     max-width: 500px; 
     margin: 0 auto;
     background: var(--output-card-city-weather-bg);
     border-radius: 10px;
     box-shadow: 0 4px 10px 0 var(--weather-container-shadow-color);
     color: var(--text-color);
+
+    display:none;
 }
 
 .upper-part {
@@ -129,7 +131,8 @@ input {
     background: transparent;
     border: 0;
     outline: 0;
-    font-size: 18px;
+    font-size: 20px;
+    font-weight: 100em;
     color: var(--input-text-color);
 }
 
@@ -138,6 +141,36 @@ button {
     border: 0;
     outline: 0;
 }
+
+.weather-card-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    padding: 10px 0 0 0;
+}
+
+.close-button {
+    background-color: #5b548a;
+    width: 100px;
+    color: #fff;
+    padding: 10px 40px;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease; 
+}
+
+.close-button:hover {
+    color: black; 
+    background-color: #ffffff;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.close-button i {
+    margin-right: 5px;
+}
+
 
 button .fa-search {
     width: 25px;
