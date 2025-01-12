@@ -8,9 +8,7 @@
   --weather-container-shadow-color: rgba(148, 212, 181, 0.4);
 
   --next-days-container-bg: linear-gradient(-10deg, #00feba, #5b548a);
-
   --city-image-container-bg: linear-gradient(250deg, #00feba, #5b548a);
-
   --output-card-city-weather-bg: linear-gradient(100deg, #00feba, #5b548a);
 }
 
@@ -122,10 +120,38 @@ body {
   }
 }
 
+.website-name {
+  margin: 50px auto;
+  font-size: 4em;
+  font-weight: bold;
+  color: transparent;
+  background: var(--city-image-container-bg);
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  text-align: center;
+  padding: 20px;
+
+  background-color: white;
+  box-shadow: 0 10px 15px rgba(256, 256, 256, 0.1);
+  border-radius: 10px;
+
+  border: 10px solid transparent;
+  border-image: var(--city-image-container-bg) 1;
+
+  width: fit-content;
+  transition: all 0.3s ease;
+}
+
+.website-name:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
 .search-box {
   width: 600px;
   background: var(--search-box-bgcolor);
-  margin: 200px auto 0;
+  margin: 100px auto 0;
   border-radius: 5px;
 }
 

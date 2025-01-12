@@ -4,15 +4,24 @@ document.addEventListener("DOMContentLoaded", (_event) => {
   alert("After DOM has loaded");
   // todo: Add code here that updates the HTML, registers event listeners, calls HTTP endpoints, etc.
 
-  let availableKeywords = [
-    "phrase 1",
-    "city1",
-    "what year is now?",
-    "what month is special?",
-    "city3",
-    "city4",
-    "city5",
-  ];
+  // old
+  // let availableKeywords = [
+  //   "phrase 1",
+  //   "city1",
+  //   "what year is now?",
+  //   "what month is special?",
+  //   "city3",
+  //   "city4",
+  //   "city5",
+  // ];
+
+  let dataList = [];
+  let debounceTimer;
+
+  let availableKeywords = [];
+  dataList.forEach((item) => {
+    availableKeywords.push(`${item.city}, ${item.country}`);
+  });
 
   const resultBox = document.querySelector(".result-box");
   const inputBox = document.getElementById("input-box");
@@ -31,17 +40,49 @@ document.addEventListener("DOMContentLoaded", (_event) => {
   let isLoadedOnce_nextDaysForecast = false;
 
   inputBox.onkeyup = function () {
-    let result = [];
     let input = inputBox.value;
-    if (input.length) {
-      result = availableKeywords.filter((keyword) => {
-        return keyword.toLowerCase().includes(input.toLowerCase());
-      });
-      //console.log(result);
-    }
 
-    //display(result);
+    if (input.length >= 2) {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        checkForCities(input);
+      }, 500);
+    } else if (input.length === 0) {
+      display([]);
+    } else {
+      display([]);
+    }
   };
+  /////////////////////////////////////////////////////
+  // USE OF https://myprojects.geoapify.com/api ////////////
+  /////////////////////////////////////////////////////
+
+  const citiesToShowApiKey = "d548c5ed24604be6a9dd0d989631f783";
+  const citiesToShowApiURL = "https://api.geoapify.com/v1/geocode/autocomplete";
+  const cityName = "NYC";
+
+  async function checkForCities(cityName) {
+    availableKeywords = []; // clear previous results
+
+    var requestOptions = {
+      method: "GET",
+    };
+
+    fetch(
+      `https://api.geoapify.com/v1/geocode/autocomplete?text=${cityName}&type=city&format=json&apiKey=bd1f417c26fe432bbacadd5b551b3822`,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        let resultVector = result.results;
+        for (let i = 0; i < resultVector.length; i++) {
+          availableKeywords.push(
+            `${resultVector[i].city}, ${resultVector[i].country}`
+          );
+        }
+        display(availableKeywords);
+      });
+  }
 
   /////////////////////////////////////////////////////
   /// USE OF https://www.pexels.com/api/documentation /
@@ -121,8 +162,8 @@ document.addEventListener("DOMContentLoaded", (_event) => {
 
     let lon = data.coord.lon;
     let lat = data.coord.lat;
-    console.log(lon);
-    console.log(lat);
+    //console.log(lon);
+    //console.log(lat);
 
     findFiveDayWeather(lat, lon);
   }
@@ -243,16 +284,30 @@ document.addEventListener("DOMContentLoaded", (_event) => {
   });
 
   function display(result) {
-    const content = result.map((list) => {
-      return "<li>" + list + "</li>";
-    });
+    // when new display, clear the previous result
+    resultBox.innerHTML = "";
 
-    resultBox.innerHTML = "<ul>" + content.join("") + "</ul>";
+    if (result.length > 0) {
+      const ul = document.createElement("ul");
+
+      result.forEach((item) => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        ul.appendChild(li);
+      });
+      resultBox.appendChild(ul);
+    }
   }
 
   resultBox.addEventListener("click", (event) => {
     if (event.target.tagName === "LI") {
       inputBox.value = event.target.innerHTML;
+    }
+  });
+
+  inputBox.addEventListener("input", () => {
+    if (inputBox.value.trim() === "") {
+      resultBox.innerHTML = "";
     }
   });
 });
