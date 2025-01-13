@@ -29,6 +29,20 @@ body {
   display: none;
 }
 
+.saved-city-title {
+  padding: 10px;
+  font-size: 16px;
+  color: #333;
+  border-bottom: 1px solid #e0e0e0;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+  background: var(--next-days-container-bg);
+  color: white;
+
+  font-size: 20px;
+  text-align: center;
+}
+
 .saved-city-item {
   padding: 10px;
   font-size: 16px;
