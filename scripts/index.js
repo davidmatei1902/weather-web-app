@@ -15,13 +15,20 @@ document.addEventListener("DOMContentLoaded", (_event) => {
   //   "city5",
   // ];
 
+  //new
+  let availableKeywords = [];
+
   let dataList = [];
   let debounceTimer;
 
-  let availableKeywords = [];
+  let savedCities = new Set(); // unique cities
+
   dataList.forEach((item) => {
     availableKeywords.push(`${item.city}, ${item.country}`);
   });
+
+  const heart = document.querySelector(".heart");
+  const savedCityContainer = document.querySelector(".saved-city-container");
 
   const resultBox = document.querySelector(".result-box");
   const inputBox = document.getElementById("input-box");
@@ -53,8 +60,67 @@ document.addEventListener("DOMContentLoaded", (_event) => {
       display([]);
     }
   };
+
+  function updateHeartState(city) {
+    if (savedCities.has(city)) {
+      heart.classList.add("filled");
+      heart.classList.remove("empty");
+    } else {
+      heart.classList.add("empty");
+      heart.classList.remove("filled");
+    }
+  }
+
+  heart.addEventListener("click", () => {
+    const currentCity = inputBox.value.trim();
+
+    if (!currentCity) {
+      alert("Please enter a city before saving.");
+      return;
+    }
+
+    heart.classList.toggle("filled");
+    heart.classList.toggle("empty");
+
+    if (savedCities.has(currentCity)) {
+      savedCities.delete(currentCity);
+    } else {
+      savedCities.add(currentCity);
+    }
+
+    updateSavedCityList();
+    console.log(savedCities);
+  });
+
+  function updateSavedCityList() {
+    savedCityContainer.innerHTML = "";
+
+    if (savedCities.size === 0) {
+      savedCityContainer.style.display = "none";
+    } else {
+      savedCityContainer.style.display = "block";
+    }
+
+    const ul = document.createElement("ul");
+
+    savedCities.forEach((city) => {
+      const li = document.createElement("li");
+      li.textContent = city;
+      li.classList.add("saved-city-item");
+
+      li.addEventListener("click", () => {
+        inputBox.value = city;
+        searchButton.click();
+      });
+
+      ul.appendChild(li);
+    });
+
+    savedCityContainer.appendChild(ul);
+  }
+
   /////////////////////////////////////////////////////
-  // USE OF https://myprojects.geoapify.com/api ////////////
+  // USE OF https://myprojects.geoapify.com/api ///////
   /////////////////////////////////////////////////////
 
   const citiesToShowApiKey = "d548c5ed24604be6a9dd0d989631f783";
@@ -258,6 +324,8 @@ document.addEventListener("DOMContentLoaded", (_event) => {
   }
 
   searchButton.addEventListener("click", () => {
+    const city = inputBox.value.trim();
+
     if (isLoadedOnce_nextDaysForecast) {
       alert("You must clear the current forecast before searching again.");
       return;
@@ -268,9 +336,13 @@ document.addEventListener("DOMContentLoaded", (_event) => {
       loadingWeatherTab(50);
       addLoadingTime(50);
     }
+
+    removeNextDaysPrognosis();
     openWeatherTab();
-    checkWeather(inputBox.value);
-    checkBackgroundImage(inputBox.value);
+    checkWeather(city);
+    checkBackgroundImage(city);
+
+    updateHeartState(city);
 
     isLoadedOnce_nextDaysForecast = true;
   });
@@ -284,7 +356,6 @@ document.addEventListener("DOMContentLoaded", (_event) => {
   });
 
   function display(result) {
-    // when new display, clear the previous result
     resultBox.innerHTML = "";
 
     if (result.length > 0) {
@@ -293,8 +364,14 @@ document.addEventListener("DOMContentLoaded", (_event) => {
       result.forEach((item) => {
         const li = document.createElement("li");
         li.textContent = item;
+
+        li.addEventListener("click", () => {
+          inputBox.value = item;
+        });
+
         ul.appendChild(li);
       });
+
       resultBox.appendChild(ul);
     }
   }
@@ -306,7 +383,10 @@ document.addEventListener("DOMContentLoaded", (_event) => {
   });
 
   inputBox.addEventListener("input", () => {
-    if (inputBox.value.trim() === "") {
+    const input = inputBox.value.trim();
+    if (input === "") {
+      displaySavedCities();
+    } else {
       resultBox.innerHTML = "";
     }
   });
