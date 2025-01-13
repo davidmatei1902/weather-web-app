@@ -263,17 +263,17 @@ document.addEventListener("DOMContentLoaded", (_event) => {
       newImage.classList.add(`next-days-image`);
 
       if (typeOfWeather == "Clouds") {
-        newImage.src = "../assets/images/clouds.png";
+        newImage.src = "./assets/images/clouds.png";
       } else if (typeOfWeather == "Clear") {
-        newImage.src = "../assets/images/clear.png";
+        newImage.src = "./assets/images/clear.png";
       } else if (typeOfWeather == "Rain") {
-        newImage.src = "../assets/images/rain.png";
+        newImage.src = "./assets/images/rain.png";
       } else if (typeOfWeather == "Drizzle") {
-        newImage.src = "../assets/images/drizzle.png";
+        newImage.src = "./assets/images/drizzle.png";
       } else if (typeOfWeather == "Mist") {
-        newImage.src = "../assets/images/mist.png";
+        newImage.src = "./assets/images/mist.png";
       } else if (typeOfWeather == "Snow") {
-        newImage.src = "../assets/images/snow.png";
+        newImage.src = "./assets/images/snow.png";
       }
 
       let newH1 = document.createElement("h1");
