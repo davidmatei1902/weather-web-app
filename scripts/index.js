@@ -211,17 +211,17 @@ document.addEventListener("DOMContentLoaded", (_event) => {
       data.wind.speed + " km/h";
 
     if (data.weather[0].main == "Clouds") {
-      weatherIcon.src = "../assets/images/clouds.png";
+      weatherIcon.src = "./assets/images/clouds.png";
     } else if (data.weather[0].main == "Clear") {
-      weatherIcon.src = "../assets/images/clear.png";
+      weatherIcon.src = "./assets/images/clear.png";
     } else if (data.weather[0].main == "Rain") {
-      weatherIcon.src = "../assets/images/rain.png";
+      weatherIcon.src = "./assets/images/rain.png";
     } else if (data.weather[0].main == "Drizzle") {
-      weatherIcon.src = "../assets/images/drizzle.png";
+      weatherIcon.src = "./assets/images/drizzle.png";
     } else if (data.weather[0].main == "Mist") {
-      weatherIcon.src = "../assets/images/mist.png";
+      weatherIcon.src = "./assets/images/mist.png";
     } else if (data.weather[0].main == "Snow") {
-      weatherIcon.src = "../assets/images/snow.png";
+      weatherIcon.src = "./assets/images/snow.png";
     }
 
     console.log(data);
