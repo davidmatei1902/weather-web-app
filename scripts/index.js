@@ -355,6 +355,18 @@ document.addEventListener("DOMContentLoaded", (_event) => {
     isLoadedOnce_nextDaysForecast = false;
   });
 
+  resultBox.addEventListener("click", (event) => {
+    if (event.target.classList.contains("result-item")) {
+      inputBox.value = event.target.textContent;
+      searchButton.click();
+      clearResults();
+    }
+  });
+
+  function clearResults() {
+    resultBox.innerHTML = "";
+  }
+
   function display(result) {
     resultBox.innerHTML = "";
 
@@ -364,6 +376,7 @@ document.addEventListener("DOMContentLoaded", (_event) => {
       result.forEach((item) => {
         const li = document.createElement("li");
         li.textContent = item;
+        li.classList = "result-item";
 
         li.addEventListener("click", () => {
           inputBox.value = item;
