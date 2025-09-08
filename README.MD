@@ -1,16 +1,28 @@
 # Weather Viewer Application
 
-This is a **Weather Web App** built using **HTML, CSS, and JavaScript**.  
-It allows users to search for a city and view its weather details using a weather API.
+This is a **Weather Web Application** built using **HTML, CSS, and JavaScript**.  
+It allows users to search for a city and view detailed weather information retrieved from a weather API using **API keys** for secure access.
 
-## Story
+The application dynamically updates the page content based on the user's input. It displays:
 
-People always talk about the weather and frequently check it in apps.  
-This web application lets you enter a city name (with autocomplete help) and see its current weather, with a UI that blends a city photo with the application.
+- Current weather conditions
+- Weather forecast for the upcoming days
+- Wind direction and speed
+- Humidity levels
+- Current sunrise and sunset times
+
+The interface is enhanced with city photos to provide a visually appealing and intuitive user experience.
+
+## Technical Details
+
+- Built using **HTML, CSS, and JavaScript**
+- Uses **dynamic content rendering** to update the page without reloading
+- Connects to external APIs with **API keys**
+- Implements autocomplete functionality to help users select cities quickly
 
 ## Resources
 
-- [JavaScript First steps](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps)
+- [JavaScript First Steps](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps)
 - [JavaScript Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
 - Weather APIs: [WeatherAPI](https://www.weatherapi.com/docs/), [OpenWeatherMap](https://openweathermap.org/api), [Open-Meteo](https://open-meteo.com/)
 - [Example autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist)
